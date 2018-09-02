@@ -3,6 +3,7 @@
 #include "imgui.h"
 #include <vector>
 #include <algorithm>
+#include <string>
 
 constexpr int BUFFER_SIZE = 1024;
 

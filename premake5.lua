@@ -1,4 +1,4 @@
-workspace "MaterializerWorkspace"
+    workspace "MaterializerWorkspace"
     language "C++"
     cppdialect "C++17"
     architecture "x86_64"
@@ -30,7 +30,11 @@ workspace "MaterializerWorkspace"
 
 
     function glfw_link()
-        links "glfw3"
+        filter{"system:linux"}
+            links "glfw" -- cannot link against glfw3 on Linux, has to be glfw
+        filter{"system:windows"}
+            links "glfw3"
+        filter{}
     end
 
     function opengl_link()
@@ -38,14 +42,17 @@ workspace "MaterializerWorkspace"
             links {"OpenGL32"}
         filter {"system:not windows"}
             links {"GL"}
+            links {"dl"} -- required by glad on non-windows systems
         filter{}
     end
 
     function halide_link()
-        filter {"configurations:Debug"}
+        filter {"configurations:Debug", "system:windows"}
             links "Halided"
-        filter {"configurations:Release"}
+        filter {"configurations:Release", "system:windows"}
             links "Halide"
+        filter {"system:linux"}
+            links "Halide" -- always link against Halide, (has no specific meaning, was too lazy to build it as debug target)
         filter{}
     end
 

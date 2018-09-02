@@ -27,7 +27,7 @@ public:
 	{
 	}
 
-	void InputPort::StoreData(const WeakTexture& data)
+	void StoreData(const WeakTexture& data)
 	{
 		inputData = data;
 	}

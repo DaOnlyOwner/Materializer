@@ -10,7 +10,7 @@ bool contains(const char* pattern, const char* text)
 		bool match = true;
 		for (int j = 0; pattern[j] != NULL; j++)
 		{
-			if (text + i + j == '\0' || tolower(text[i + j]) != tolower(pattern[j])) {
+			if (*(text + i + j) == '\0' || tolower(text[i + j]) != tolower(pattern[j])) {
 				match = false; break;
 			}
 		}
